@@ -1,0 +1,198 @@
+/*
+ * Version - 0.0.0 - Dec 28, 2015
+ * Ivy Zhou
+ * Includes less styles and more standardized CSS
+ */
+
+/* theme colour scheme generated at coolors.co */
+// irrelevant due to black and white color scheme but oh well
+@tc-offwhite: #fdfdff;
+@tc-slategrey: #4c5b61;
+@tc-lightblue: #c5e5f4;
+@tc-darkblue: #8da7be;
+@tc-lightgreen: #c8ead3;
+@navbar-color: #000;
+@navbar-link-color: #fff - @navbar-color; // get me the complement colour!
+
+/* default fonts */
+@default-font: 'Roboto', sans-serif;
+
+/* constants for sizes */
+@title-size: 3em;
+@navbar-width: 240px;
+
+/* these mixins are not the most necessary, but contain useful bits of reusable code */
+// makeshift jumbotron-type centering trick
+.Center {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate3d(-50%,-50%,0);
+  -moz-webkit-transform: translate3d(-50%,-50%,0);
+  transform: translate3d(-50%,-50%,0);
+  text-align: center;
+}
+
+// off screen site navigation bar styling
+.OffScreenPage {
+  position: relative;
+  overflow-x: hidden;
+  margin:0;
+  height:100%;
+}
+
+// assumes your nav options are in a ul, 4 levels is pushing it a little
+.OffScreenNav {
+  position:fixed;
+  left: -@navbar-width;
+  width: @navbar-width;
+  height: 100%;
+  background: @navbar-color;
+
+  // description of links styling
+  & > h2 {
+    color: @navbar-link-color;
+    padding: 30% 10% 10% 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-bottom: 1px solid #fff;
+    font-size: 1em;
+  }
+
+  // option list styling
+  & > ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    // list items styling
+    & > li {
+      cursor: pointer; // you can click the whole box!
+      &:hover { background-color: @navbar-link-color; }
+
+      & > a {
+        display:block;
+        height:100%;
+        width: 85%;
+        padding-left: 15%;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        color: @navbar-link-color;
+        font-size: 1.25em;
+
+        &:hover {
+            color: @navbar-color;
+        }
+      }
+    }
+  }
+}
+
+// remove default styling for links
+a:link, a:visited {
+	text-decoration: none;
+}
+
+// set up default font
+body, html {
+  .OffScreenPage;
+  font-family: @default-font;
+}
+
+// temporary canvas styling so that I can see the rest of the styles :<
+#canvas {
+  opacity: 0.1;
+  filter: alpha(opacity=10); /* For IE8 and earlier */
+}
+
+// more styling for the jumbotron-ish thing
+#greeting {
+  .Center;
+  & > h1 { font-size: @title-size; }
+  & > p { margin-top: -20px; }
+}
+
+// navigation styling
+#nav {
+  .OffScreenNav;
+}
+
+// navigation icon tab styling
+#nav-tab {
+  cursor: pointer;
+  float: left;
+  width: 48px;
+  height: 48px;
+}
+
+/* about page specific styles */
+.GrayHover {
+  &:hover {
+    background-color: #ddd;
+  }
+}
+
+#quick-stats {
+  display:inline-block;
+  padding: 10px;
+  float:left;
+  height:100%;
+  width: 25%;
+  min-width: 300px;
+
+  & > h2 {
+    font-size: 1em;
+    margin-bottom: -10px;
+  }
+
+  & > ul {
+    font-size: 0.90em;
+    list-style-type: none;
+
+    & > li {
+      float: left;
+      background-color: #ddd;
+      padding: 6px;
+      margin: 6px;
+    }
+  }
+}
+
+#personal-bio, #social-media {
+  display:inline-block;
+  padding: 10px;
+  min-width: 240px;
+  margin-left: 20px;
+  height: 100%;
+  width: 40%;
+}
+
+#banner {
+  display: inline-block;
+  margin-top: 5%;
+  margin-right: 3.5%;
+  max-height: 400px;
+  float:right;
+}
+
+#about-wrapper {
+  margin-top: 40px;
+  min-width: 240px;
+  margin-left: 20px;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+#github {
+  border-radius: 9999px;
+  .GrayHover;
+}
+
+#linkedin {
+  border-radius: 6px;
+  .GrayHover;
+}
