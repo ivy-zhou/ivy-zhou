@@ -39,3 +39,38 @@ function closeNav() {
   $('#nav').animate({left: "-240px"}, 200);
   $('body').animate({left: "0px"}, 200);
 };
+
+// animate tags on about page, need a more specific selector in the future
+// need to figure out how to dynamically resize li objects to create slide-in, slide-out effect!
+$('#quick-stats > ul > li').hover(
+  // hover in
+  function()
+  {
+    if($(this).hasClass('proficient')){
+    // append "proficient", "familiar", "learning" tags
+      var object = this;
+      // $(object).append(" | Proficient");
+      $(object).css("background-color", "#59CD90");
+
+      // implement resize with animation later
+      // $(object).css({'width': $(object).width() + 'px'});
+    }
+    if($(this).hasClass('familiar')){
+      $(this).css("background-color", "#FFCB47");
+    }
+    if($(this).hasClass('learning')){
+      $(this).css("background-color", "#EE6352");
+    }
+  },
+
+  //hover out
+  function()
+  {
+    if($(this).hasClass('proficient') || $(this).hasClass('familiar') ||
+      $(this).hasClass('learning')){
+      // $(this).html($(this).html().split(" | Proficient").join(""));
+      // $(this).css({'width': $(this).width() + 'px'});
+      $(this).css("background-color", "#ddd");
+    }
+  }
+);

@@ -30,7 +30,6 @@
   -webkit-transform: translate3d(-50%,-50%,0);
   -moz-webkit-transform: translate3d(-50%,-50%,0);
   transform: translate3d(-50%,-50%,0);
-  text-align: center;
 }
 
 // off screen site navigation bar styling
@@ -108,6 +107,7 @@ body, html {
 // more styling for the jumbotron-ish thing
 #greeting {
   .Center;
+  text-align: center;
   & > h1 { font-size: @title-size; }
   & > p { margin-top: -20px; }
 }
@@ -154,6 +154,11 @@ body, html {
       background-color: #ddd;
       padding: 6px;
       margin: 6px;
+
+      // enable tagging functionality
+      &:hover {
+        //cursor:pointer;
+      }
     }
   }
 }
@@ -164,15 +169,16 @@ body, html {
   min-width: 240px;
   margin-left: 20px;
   height: 100%;
-  width: 40%;
+  width: 30%;
 }
 
+// want to show/hide this picture in the future
 #banner {
   display: inline-block;
   margin-top: 5%;
-  margin-right: 3.5%;
+  margin-right: 10%;
   max-height: 400px;
-  float:right;
+  float: right;
 }
 
 #about-wrapper {
@@ -195,4 +201,23 @@ body, html {
 #linkedin {
   border-radius: 6px;
   .GrayHover;
+}
+
+/* projects styling */
+#projects-title {
+  margin-top: 50px;
+  text-align: center;
+}
+
+#projects {
+  margin-left: 10%;
+  td:first-child {
+    padding-bottom: 10%;
+    text-align: center;
+  }
+  td:nth-child(2)
+  {
+    padding-left: 5%;
+    max-width: 375px;
+  }
 }
