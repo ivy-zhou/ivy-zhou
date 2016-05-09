@@ -12,69 +12,173 @@
         <title>Ivy Zhou</title>
 
         <!-- metadata -->
-        <meta name="description" content="Ivy Zhou is a software engineering student at uWaterloo. She's kind of silly.">
+        <meta name="description" content="Ivy Zhou is a software engineering student at uWaterloo.">
         <meta name="keywords" content="Ivy Zhou, Ivy, Zhou, software engineering, uWaterloo" />
         <meta name="author" content="Ivy Zhou"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <!-- dummy icons -->
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="shortcut icon" href="favicon.ico"/>
 
-        <!-- dummy favicon -->
-         <link rel="shortcut icon" href="favicon.ico"/>
+        <!-- fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
 
-         <!-- fonts -->
-         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Bootstrap
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+         integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+         integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script> -->
 
-         <!-- styling -->
+        <!-- styling -->
         <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/animate.css">
+        <!-- <link rel="stylesheet" href="css/animate.css"> -->
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/styles.css">
+
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
         <!-- off screen site navigation -->
-        <img src = "img/menu-icon.svg" id = "nav-tab" class = "closed" onclick = "toggleNav()" alt = "open menu"/>
+        <img src = "img/menu-icon-dark.svg" id = "nav-tab" class = "closed" onclick = "toggleNav()"/>
         <nav id = "nav">
-          <h2>Quick links. Or at least, average-paced ones.</h2>
+          <h2>Menu</h2>
           <ul>
-            <li><a href = "index.html">home</a></li>
-            <li><a href = "projects.html">projects</a></li>
+            <li id = "home-link"><a href = "index.html">home</a></li>
+            <li id = "projects-link"><a href = "index.html#projects">projects</a></li> <!-- href = "index.html#projects" -->
             <!-- <li><a href = "coursework.html">coursework</a></li> -->
             <!-- <li><a href = "blog.html">blog</a></li> -->
-            <li><a href = "about.html">about</a></li>
+            <li id = "about-link"><a href = "index.html#about">about</a></li>
             <!-- <li><a href = "contact.html">contact</a></li> -->
           <ul>
         </nav>
 
         <!-- content goes here -->
         <div class = "main-content">
-          <div id="large-header" class="large-header">
-              <canvas id="canvas"></canvas>
-              <div id = "greeting">
-                <h1 class = "title animated bounceInUp">Hi there, I'm Ivy Zhou!</h1>
-                <p id = "subtitle">I write code.</p>
-              </div>
-          </div>
-        </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+          <div id = "home">
+            <canvas id = "canvas"></canvas>
+            <div id = "greeting">
+              <h1 class = "title">Ivy <b>Zhou</b></h1>
+              <p>Developer, writer, and funny on occasion.</p>
+              <button id = "conway-info-button" onclick = toggleConwayInfo()>?</button>
+              <div id = "conway-info" class = "hidden">
+                <span>Press <span>[p]</span> to start/stop Conway's Game of Life.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- projects -->
+          <div id = "projects">
+            <h1 id = "projects-title">Projects</h1>
+            <table id = "projects-table">
+              <tr>
+                <td><img src = "img/scrabble1.gif" alt "Scrabble" width = "300px" height = "300px"/>
+                    <img src = "img/scrabble2.gif" alt "Scrabble" width = "300px" height = "300px"/>
+                </td>
+                <td><h2>Scrabble</h2>
+                    <p>A Scrabble clone written in Java. Supports tile shuffle/exchange/recall, in-game help, player vs. player,
+                      and player vs. computer.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><img src = "img/wordpress.gif" alt "Wordpress Theme" width = "600px" height = "300px"/></td>
+                <td><h2>Glasses Wordpress Theme</h2>
+                    <p>A simple Wordpress Theme supporting tagging, time-stamped posts, and customizable menu links.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><img src = "img/zaplug.gif" alt "Zaplug Game" height = "300px"/></td>
+                <td><h2>ZAPLUG!!!</h2>
+                    <p>A 2D platform game under development where you play as a zappy sort of plug!
+                      Implemented on the HTML5 canvas, and featuring mildly believable physics.</p>
+                </td>
+              </tr>
+              <tr>
+                <td><img src = "img/bopit.gif" alt "Zaplug Game" height = "300px"/></td>
+                <td><h2>ORB IT!</h2>
+                    <p>An adaptation of the popular children's toy, Bop It! using the Orbit Booster Pack
+                    and the Tiva C LaunchPad. Also integrates with Processing code to support sound
+                    effects.</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- about -->
+          <div id = "about">
+            <!-- quick stats column -->
+            <div id = "about-wrapper">
+            <div id = "quick-stats">
+                <h1>Skill Set</h1>
+                <h2>Languages</h2>
+                <ul class = "languages cloud">
+                  <li class = "proficient">Java</li><li class = "proficient">JavaScript</li>
+                  <li class = "proficient">jQuery</li><li class = "familiar">Python</li>
+                  <li class = "learning">PHP</li><li class = "learning">MySQL</li>
+                  <li class = "proficient">C</li><li class = "familiar">C++</li>
+                </ul><br><br><br><br><br><br> <!-- change this later -->
+                <h2>Markup</h2>
+                <ul class = "markup cloud">
+                  <li class = "proficient">HTML</li><li class = "proficient">CSS</li>
+                  <li class = "proficient">LESS</li><li class = "learning">SASS</li>
+                </ul><br><br>
+                <h2>Tools</h2>
+                <ul class = "software cloud">
+                  <li class = "proficient">Git</li><li class = "proficient">AutoCAD</li>
+                  <li class = "proficient">SketchUp</li><li class = "learning">Grunt</li>
+                  <li class = "proficient">Adobe Illustrator</li><li class = "familiar">Adobe Photoshop</li>
+                </ul>
+            </div>
+
+            <!-- personal bio column -->
+            <div id = "personal-bio">
+              <h1>About</h1>
+              <p>
+                Ivy Zhou is a Software Engineering student at the University of Waterloo
+                who speaks some dialects of computer. She's a quick study, a team player,
+                and very lucky to be studying in a field that she's passionate about.
+              </p>
+              <p>
+                Want to work on something together?
+                <a href = "mailto:ivyzhou2012@hotmail.com">Contact me</a> or have a gander at
+                <a href = "IvyZhou_Resume.pdf" download>my resume.</a>
+              </p>
+            </div>
+
+            <img src = "img/ivyzhou_banner1.jpg" id = "banner" alt = "Ivy Zhou"/>
+
+            <div id = "social-media">
+              <h1>Find me on</h1>
+                <a href = "https://github.com/ivy-zhou">
+                  <img src = "img/github-icon.png" id = "github" class = "icon" alt = "GitHub"/></a>
+                <a href = "https://ca.linkedin.com/in/zhouivy">
+                  <img src = "img/linkedin-icon.png" id = "linkedin" class = "icon" alt = "LinkedIn"/></a>
+            </div>
+
+          </div>
+          </div>
+        </div> <!--- end of main content -->
+
+        <!-- scripts -->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
         <script src="js/jquery.touchSwipe.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-        <script src="js/TweenLite.min.js"></script>
-        <script src="js/EasePack.min.js"></script>
-        <script src="js/animateBG.js"></script> <!-- pending change to Conway's game of life -->
+        <script src="js/animateBG.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <!-- Google Analytics -->
         <script>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
             e.src='https://www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+            ga('create','UA-66199017-2','auto');ga('send','pageview');
         </script>
     </body>
 </html>

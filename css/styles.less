@@ -1,3 +1,5 @@
+// out: ../css/styles.css, sourcemap: false, compress: false
+
 /*
  * Version - 0.0.0 - Dec 28, 2015
  * Ivy Zhou
@@ -6,20 +8,30 @@
 
 /* theme colour scheme generated at coolors.co */
 // irrelevant due to black and white color scheme but oh well
-@tc-offwhite: #fdfdff;
-@tc-slategrey: #4c5b61;
-@tc-lightblue: #c5e5f4;
-@tc-darkblue: #8da7be;
+@tc-offwhite: #ABB2BF; // off white, used on titles
+@tc-grey2: #2F343D;
+@tc-blue: #528BFF;
+@tc-lightblue: #61AFEF;
 @tc-lightgreen: #c8ead3;
-@navbar-color: #000;
-@navbar-link-color: #fff - @navbar-color; // get me the complement colour!
+@tc-darkorange: #D19A66;
+@tc-red: #BE5046;
+@tc-yellow: #E5C07B;
+@navbar-color: #0F1011;
+@navbar-link-color: @tc-offwhite;
+@conway-info-button-bg: #0F1011;
+
 
 /* default fonts */
-@default-font: 'Roboto', sans-serif;
+@default-font: 'Open Sans', sans-serif;
 
 /* constants for sizes */
 @title-size: 3em;
 @navbar-width: 240px;
+
+// debugging
+// * {
+//   outline: 1px solid red;
+// }
 
 /* these mixins are not the most necessary, but contain useful bits of reusable code */
 // makeshift jumbotron-type centering trick
@@ -34,6 +46,7 @@
 
 // off screen site navigation bar styling
 .OffScreenPage {
+  min-width: 384px;
   position: relative;
   overflow-x: hidden;
   margin:0;
@@ -50,11 +63,11 @@
 
   // description of links styling
   & > h2 {
-    color: @navbar-link-color;
+    color: @tc-darkorange;
     padding: 30% 10% 10% 10%;
     margin-left: 5%;
     margin-right: 5%;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid @tc-darkorange;
     font-size: 1em;
   }
 
@@ -80,11 +93,20 @@
         font-size: 1.25em;
 
         &:hover {
-            color: @navbar-color;
+            background-color: @tc-grey2;
+            color: @tc-darkorange;
+            border-left: 5px solid @tc-blue;
         }
       }
     }
   }
+}
+
+.NoAnimation {
+  -webkit-animation: none !important;
+  -moz-animation: none !important;
+  -ms-animation: none !important;
+  animation: none !important;
 }
 
 // remove default styling for links
@@ -93,24 +115,71 @@ a:link, a:visited {
 }
 
 // set up default font
-body, html {
+body {
   .OffScreenPage;
-  font-family: @default-font;
 }
 
-// temporary canvas styling so that I can see the rest of the styles :<
-#canvas {
-  opacity: 0.1;
-  filter: alpha(opacity=10); /* For IE8 and earlier */
+html {
+  min-width: 384px;
+  position: relative;
+  margin:0;
+  height:100%;
 }
 
 // more styling for the jumbotron-ish thing
 #greeting {
   .Center;
+  top: 60%;
+  color: @tc-offwhite;
   text-align: center;
-  & > h1 { font-size: @title-size; }
-  & > p { margin-top: -20px; }
+  & > h1 { // bold part of the title
+    font-weight: 400;
+    font-size: @title-size;
+    & > b { font-weight: 700; }
+  }
+  & > p { margin-top: -25px; }
+  & > button { margin-top: 10px; }
+  // conway info
+  & > div {
+    margin-top: 100px;
+    opacity: 0;
+    padding: 10px;
+    outline: 1px solid @tc-offwhite;
+    & > span {
+      font-size: 0.8em;
+    }
+  }
 }
+
+// Conway's game of life stylings
+#canvas {
+  position: relative;
+}
+
+#conway-info-button {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  opacity: 0.5;
+  border: none;
+  box-shadow: 0 0 0 0 rgba(92, 99, 112, 0.7);
+  border-radius: 50%;
+  color: @tc-darkorange;
+  background-color: @conway-info-button-bg;
+  cursor: pointer;
+  -webkit-animation: pulse 3.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  -moz-animation: pulse 3.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  -ms-animation: pulse 3.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: pulse 3.25s infinite cubic-bezier(0.66, 0, 0, 1);
+
+  &:focus { .NoAnimation; outline: none;}
+  &:hover { .NoAnimation; box-shadow: 0 0 0 1pt @tc-blue;}
+}
+
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 
 // navigation styling
 #nav {
@@ -120,9 +189,11 @@ body, html {
 // navigation icon tab styling
 #nav-tab {
   cursor: pointer;
+  position: fixed;
   float: left;
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
+  z-index: 10000;
 }
 
 /* about page specific styles */
@@ -181,10 +252,15 @@ body, html {
   float: right;
 }
 
+#about {
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+}
+
 #about-wrapper {
-  margin-top: 40px;
+  //margin-top: -0px;
   min-width: 240px;
-  margin-left: 20px;
+  margin-left: 128px;
 }
 
 .icon {
@@ -205,11 +281,11 @@ body, html {
 
 /* projects styling */
 #projects-title {
-  margin-top: 50px;
+  padding-top: 50px;
   text-align: center;
 }
 
-#projects {
+#projects-table {
   margin-left: 10%;
   td:first-child {
     padding-bottom: 10%;

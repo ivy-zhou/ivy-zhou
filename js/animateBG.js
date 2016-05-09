@@ -1,133 +1,271 @@
 /*
  * Version - 0.0.0 - Dec 28, 2015
- * Based on code from http://tympanus.net/codrops/2014/09/23/animated-background-headers/
- * Pending change to Conway's Game of Life
+ * Ivy Zhou
+ * Conway's Game of Life Background
  */
- 
+
+ var CELL_SIZE = 64; // need code to adjust this for differently sized screens so I don't run out of memory
+ var DEAD = false;  // false - dead, true - alive for cells
+ var ALIVE = true;
+ var ALIVE_COLOUR = "#282C34"; //75ABBC
+ var DEAD_COLOUR = "#2F343D";
+ var GRID_COLOUR = "#ddd";
+ var DISABLED_COLOUR = "#ABB2BF";
+ var STARTING_POPULATION = 0.75;
+
+ var grid = [];
+ var width, height, canvas, ctx, noOfRows, noOfCols, isPlaying = false, interval;
+ var overlayPresent = false;
+
+function isInBounds (row, col) {
+  return col >= 0 && col < noOfCols && row >= 0 && row < noOfRows;
+}
+
+// Cell class constructor
+var Cell = function(row, col) {
+  this.row = row;
+  this.col = col;
+  this.curState = DEAD;
+  this.nextState = false;
+
+  this.draw = function () {
+    if(this.curState) // if I'm alive, draw me
+      ctx.fillStyle = ALIVE_COLOUR; // alive colour
+    else
+      ctx.fillStyle = DEAD_COLOUR;
+    ctx.fillRect(this.col * CELL_SIZE, this.row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+  };
+
+  this.setNextState = function() {
+    // look for my neighbours
+    var aliveNeighbours = 0;
+
+    for(var rowPos = this.row - 1; rowPos <= this.row + 1; rowPos++)
+    {
+      for(var colPos = this.col - 1; colPos <= this.col + 1; colPos++)
+      {
+        //console.log("rowPos: " + rowPos + " colPos: " + colPos);
+        if(!(rowPos == this.row && colPos == this.col) &&
+          isInBounds(rowPos, colPos) && grid[rowPos][colPos].curState)
+          {
+            grid[rowPos][colPos].draw();
+            //console.log("found a live neighbour at rowPos: " + rowPos + " colPos: " + colPos);
+            aliveNeighbours++;
+          }
+
+      }
+    }
+
+    if(this.curState == ALIVE && (aliveNeighbours < 2 || aliveNeighbours > 3)) // under/over population
+      this.nextState = DEAD;
+    if(this.curState == ALIVE && (aliveNeighbours >= 2 && aliveNeighbours <= 3)) // if we have 2-3 neighbours, we're alive still!
+      this.nextState = ALIVE;
+    if(this.curState == DEAD && aliveNeighbours == 3) // reproduction
+      this.nextState = ALIVE;
+  };
+
+  this.updateState = function() {
+    this.curState = this.nextState;
+    this.nextState = false;
+  };
+};
+
+// generate a random grid space
+function randomGridPos (noOfRows, noOfCols) {
+  var pos = [];
+  pos[0] = Math.floor(Math.random() * noOfRows); // generate random row
+  pos[1] = Math.floor(Math.random() * noOfCols); // generate random col
+  return pos;
+}
+
+// draws gridlines, may be not used
+function drawGrid () {
+  ctx.strokeStyle = GRID_COLOUR;
+  ctx.beginPath();
+  for(var i = 0; i < noOfRows; i++)
+  {
+    ctx.moveTo(0, i * CELL_SIZE);
+    ctx.lineTo(canvas.width, i * CELL_SIZE);
+    ctx.stroke(); // draw each row line
+    for(var j = 0; j < noOfCols; j++)
+    {
+      ctx.moveTo(j * CELL_SIZE, 0);
+      ctx.lineTo(j * CELL_SIZE, canvas.height);
+      ctx.stroke(); // draw each col line
+    }
+  }
+}
+
 function animateBackground () {
+  // main
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
 
-    var width, height, largeHeader, canvas, ctx, triangles, target, animateHeader = true;
-    var colors = ['72,35,68', '43,81,102', '66,152,103', '250,178,67', '224,33,48'];
+  initAnimation();
+  addListeners();
+  //setInterval(animate, 1000);
 
-    // Main
-    initHeader();
-    addListeners();
-    initAnimation();
-
-    function initHeader() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        target = {x: 0, y: height};
-
-        // largeHeader = document.getElementById('large-header');
-        // largeHeader.style.height = height+'px';
-
-        canvas = document.getElementById('canvas');
-        canvas.width = width;
-        canvas.height = height;
-        ctx = canvas.getContext('2d');
-
-        // create particles
-        triangles = [];
-        for(var x = 0; x < 480; x++) {
-            addTriangle(x*10);
-        }
+  function initAnimation ()
+  {
+    // model the canvas as a grid containing life cells
+    noOfCols = window.innerWidth % CELL_SIZE === 0 ?
+        Math.floor(window.innerWidth / CELL_SIZE) : Math.floor(window.innerWidth / CELL_SIZE) + 1;
+    noOfRows = window.innerHeight % CELL_SIZE === 0 ?
+        Math.floor(window.innerHeight / CELL_SIZE) : Math.floor(window.innerHeight / CELL_SIZE) + 1;
+    canvas.width = noOfCols * CELL_SIZE; // resive canvas to be an exact fit
+    canvas.height = noOfRows * CELL_SIZE;
+    grid = new Array(noOfRows);
+    for(var k = 0; k < noOfRows; k++)
+    {
+      grid[k] = new Array(noOfCols);
+      for(var n = 0; n < noOfCols; n++)
+        grid[k][n] = new Cell(k, n);
     }
 
-    function addTriangle(delay) {
-        setTimeout(function() {
-            var t = new Triangle();
-            triangles.push(t);
-            tweenTriangle(t);
-        }, delay);
+    // generate a number of random cells to be alive already
+    var numAlive = Math.floor(STARTING_POPULATION * noOfCols * noOfRows);
+    while(numAlive > 0)
+    {
+      var nextPos = randomGridPos(noOfRows, noOfCols);
+      grid[nextPos[0]][nextPos[1]].curState = ALIVE;
+      numAlive--;
     }
 
-    function initAnimation() {
-        animate();
-    }
+    draw();
+  }
 
-    function tweenTriangle(tri) {
-        var t = Math.random()*(2*Math.PI);
-        var x = (200+Math.random()*100)*Math.cos(t) + width*0.5;
-        var y = (200+Math.random()*100)*Math.sin(t) + height*0.5-20;
-        var time = 4+3*Math.random();
-
-        TweenLite.to(tri.pos, time, {x: x,
-            y: y, ease:Circ.easeOut,
-            onComplete: function() {
-                tri.init();
-                tweenTriangle(tri);
-        }});
-    }
-
-    // Event handling
+    // Event handling, make these jQuery later for cross-browser compatibility
     function addListeners() {
         window.addEventListener('scroll', scrollCheck);
         window.addEventListener('resize', resize);
+        window.addEventListener('click', onClick);
     }
 
+    // don't animate if we're not being looked at
     function scrollCheck() {
-        if(document.body.scrollTop > height) animateHeader = false;
-        else animateHeader = true;
+        if(document.body.scrollTop > height)
+          isPlaying = false;
+        else
+          isPlaying = true;
     }
 
     // makes animation responsive
     function resize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+        isPlaying = false;
+        clearInterval(interval);
+        initAnimation();
+    }
+
+    function onClick(event) {
+      isPlaying = false;
+      clearInterval(interval);
+
+      // check if the nav-tab is pushed out or if the Conway button was clicked
+      if(!$("#nav-tab").hasClass("closed"))
+      {
+        // create an overlay over the canvas once, and don't allow clicks anymore!
+        if(!overlayPresent)
+        {
+          ctx.globalAlpha = 0.25;
+          ctx.fillStyle = DISABLED_COLOUR;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.globalAlpha = 1;
+          overlayPresent = true;
+        }
+        return;
+      }
+      else
+      {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        overlayPresent = false;
+      }
+
+      // don't let them click cells under the nav-tab
+      var ntabPos = $("#nav-tab").position();
+      if(event.clientX >= ntabPos.left && event.clientX <= ntabPos.left + CELL_SIZE &&
+        event.clientY >= ntabPos.top && event.clientY <= ntabPos.top + CELL_SIZE)
+      {
+        draw();
+        return;
+      }
+
+      var col = Math.floor(event.clientX / CELL_SIZE);
+      var row = Math.floor(event.clientY / CELL_SIZE);
+
+      if(isInBounds(row, col))
+      {
+        if(grid[row][col].curState == ALIVE)
+          grid[row][col].curState = DEAD;
+        else
+          grid[row][col].curState = ALIVE;
+      }
+
+      draw();
+    }
+
+    function printGrid() {
+      var output = "";
+      for(var i = 0; i < noOfRows; i++) {
+        for(var j = 0; j < noOfCols; j++) {
+          if(grid[i][j].curState == ALIVE)
+            output += "1 ";
+          else
+            output += "0 ";
+        }
+        output += "\n";
+      }
+      console.log(output);
+    }
+
+    function draw () {
+        //ctx.clearRect(0,0, canvas.width, canvas.height);
+        for(var i = 0; i < noOfRows; i++)
+        {
+          for(var j = 0; j < noOfCols; j++)
+          {
+            grid[i][j].draw();
+          }
+        }
+
+        // draw in gridlines
+        //drawGrid();
     }
 
     function animate() {
-        if(animateHeader) {
-            ctx.clearRect(0,0,width,height);
-            for(var i in triangles) {
-                triangles[i].draw();
+        if(isPlaying) {
+          for(var i = 0; i < noOfRows; i++)
+          {
+            for(var j = 0; j < noOfCols; j++)
+            {
+              //console.log(grid[i][j]);
+              grid[i][j].draw();
+              grid[i][j].setNextState();
             }
+          }
+          // now update each cell
+          for(var i = 0; i < noOfRows; i++)  // jshint ignore:line
+            for(var j = 0; j < noOfCols; j++) // jshint ignore:line
+              grid[i][j].updateState();
         }
-        requestAnimationFrame(animate);
     }
 
-    // Canvas manipulation
-    function Triangle() {
-        var _this = this;
 
-        // constructor
-        (function() {
-            _this.coords = [{},{},{}];
-            _this.pos = {};
-            init();
-        })();
-
-        function init() {
-            _this.pos.x = width*0.5;
-            _this.pos.y = height*0.5-20;
-            _this.coords[0].x = -10+Math.random()*40;
-            _this.coords[0].y = -10+Math.random()*40;
-            _this.coords[1].x = -10+Math.random()*40;
-            _this.coords[1].y = -10+Math.random()*40;
-            _this.coords[2].x = -10+Math.random()*40;
-            _this.coords[2].y = -10+Math.random()*40;
-            _this.scale = 0.1+Math.random()*0.3;
-            _this.color = colors[Math.floor(Math.random()*colors.length)];
-            setTimeout(function() { _this.alpha = 0.8; }, 10);
+    // pause/play the simulation when the p button is hit
+    $(document).on("keypress", function (e) {
+      if(e.keyCode == 112)
+      {
+        if(isPlaying)
+        {
+          isPlaying = false;
+          clearInterval(interval);
         }
-
-        this.draw = function() {
-            if(_this.alpha >= 0.005) _this.alpha -= 0.005;
-            else _this.alpha = 0;
-            ctx.beginPath();
-            ctx.moveTo(_this.coords[0].x+_this.pos.x, _this.coords[0].y+_this.pos.y);
-            ctx.lineTo(_this.coords[1].x+_this.pos.x, _this.coords[1].y+_this.pos.y);
-            ctx.lineTo(_this.coords[2].x+_this.pos.x, _this.coords[2].y+_this.pos.y);
-            ctx.closePath();
-            ctx.fillStyle = 'rgba('+_this.color+','+ _this.alpha+')';
-            ctx.fill();
-        };
-
-        this.init = init;
-    }
+        else
+        {
+          isPlaying = true;
+          interval = setInterval(animate, 1000);
+        }
+      }
+    });
 }
 
 // animate background when document is ready
