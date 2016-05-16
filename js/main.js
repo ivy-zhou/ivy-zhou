@@ -5,6 +5,7 @@
  * Animates level of profieceny on each skill
  * Hides/shows info on the Conway cavnas
  * Scrolls to sections from menu bar
+ * Highlights and unhighlights title sections
  */
 
 // Menu scroll
@@ -28,28 +29,18 @@
  });
 
 // toggles navigation menu in and out for page by clicking nav icon
-function toggleNav() {
-  if($("#nav-tab").attr("class") == "closed")
-    openNav();
-  // close out nav if we're open right now
-  else
-    closeNav();
-  $("#nav-tab").toggleClass("closed"); // change states so we know what to do next time
-}
+$("#nav-tab").click(function(){
+    if($("#nav-tab").attr("class") == "closed")
+      openNav();
+    // close out nav if we're open right now
+    else
+      closeNav();
+    $("#nav-tab").toggleClass("closed"); // change states so we know what to do next time
+  }
+);
 
 // toggles navigation menu in and out for page by swiping on page
-$('body').swipe({
-  swipeStatus: function(event, phase, direction, distance, duration, fingers){
-    if (phase=="move" && direction =="right"){
-      openNav();
-      return false;
-    }
-    if (phase == "move" && direction =="left"){
-      closeNav();
-      return false;
-    }
-  }
-});
+$('body').swipe({swipeLeft:closeNav, swipeRight:openNav, allowPageScroll:'auto'});
 
 function openNav() {
   $('#nav').animate({left: "0px"}, 200);
@@ -61,27 +52,26 @@ function closeNav() {
   $('body').animate({left: "0px"}, 200);
 }
 
+$('#conway-info-button').click(function(){
+    // if the button has been clicked before, don't pulse anymore!
+    if(localStorage.getItem("cButtonClicked") !== null)
+      $("#conway-info-button").addClass("NoAnimation");
 
-function toggleConwayInfo() {
-  // if the button has been clicked before, don't pulse anymore!
-  if(localStorage.getItem("cButtonClicked") !== null)
-    $("#conway-info-button").addClass("NoAnimation");
+    localStorage.setItem("cButtonClicked", "clicked");
 
-  localStorage.setItem("cButtonClicked", "clicked");
-
-  // do an svg line drawing here in the future
-  if($("#conway-info").attr("class") == "hidden")
-    $("#conway-info").css("opacity", 0).animate({opacity:1}, 600);
-  else
-    $("#conway-info").css("opacity", 1).animate({opacity:0}, 400);
-  $("#conway-info").toggleClass("hidden");
-}
+    // do an svg line drawing here in the future
+    if($("#conway-info").attr("class") == "hidden")
+      $("#conway-info").css("opacity", 0).animate({opacity:1}, 600);
+    else
+      $("#conway-info").css("opacity", 1).animate({opacity:0}, 400);
+    $("#conway-info").toggleClass("hidden");
+  }
+);
 
 // animate tags on about page, need a more specific selector in the future
 // need to figure out how to dynamically resize li objects to create slide-in, slide-out effect!
 $('#quick-stats > ul > li').hover(
-  // hover in
-  function()
+  function() // hover in
   {
     if($(this).hasClass('proficient')){
     // append "proficient", "familiar", "learning" tags
@@ -99,9 +89,7 @@ $('#quick-stats > ul > li').hover(
       $(this).css("background-color", "#EE6352");
     }
   },
-
-  //hover out
-  function()
+  function() //hover out
   {
     if($(this).hasClass('proficient') || $(this).hasClass('familiar') ||
       $(this).hasClass('learning')){
@@ -111,6 +99,11 @@ $('#quick-stats > ul > li').hover(
     }
   }
 );
+
+// projects carousel using slick
+$("#projects-carousel").slick({
+  dots: true
+});
 
 // creates the appropriate animations to start
 $(document).ready(function() {

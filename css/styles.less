@@ -9,6 +9,7 @@
 /* theme colour scheme generated at coolors.co */
 // irrelevant due to black and white color scheme but oh well
 @tc-offwhite: #ABB2BF; // off white, used on titles
+@tc-darkgrey: #282C34;
 @tc-grey2: #2F343D;
 @tc-blue: #528BFF;
 @tc-lightblue: #61AFEF;
@@ -16,9 +17,11 @@
 @tc-darkorange: #D19A66;
 @tc-red: #BE5046;
 @tc-yellow: #E5C07B;
+@tc-pink: #E06C75;
+@tc-black: #0F1011;
 @navbar-color: #0F1011;
 @navbar-link-color: @tc-offwhite;
-@conway-info-button-bg: #0F1011;
+@conway-info-button-bg: @tc-black;
 
 
 /* default fonts */
@@ -28,7 +31,7 @@
 @title-size: 3em;
 @navbar-width: 240px;
 
-// debugging
+// // debugging
 // * {
 //   outline: 1px solid red;
 // }
@@ -68,7 +71,7 @@
     margin-left: 5%;
     margin-right: 5%;
     border-bottom: 1px solid @tc-darkorange;
-    font-size: 1em;
+    font-size: 1.25em;
   }
 
   // option list styling
@@ -83,12 +86,14 @@
       &:hover { background-color: @navbar-link-color; }
 
       & > a {
+        //outline: 1px red solid;
         display:block;
         height:100%;
         width: 85%;
-        padding-left: 15%;
+        padding-left: 13%;
         padding-top: 5%;
         padding-bottom: 5%;
+        border-left: 5px solid transparent;
         color: @navbar-link-color;
         font-size: 1.25em;
 
@@ -96,6 +101,7 @@
             background-color: @tc-grey2;
             color: @tc-darkorange;
             border-left: 5px solid @tc-blue;
+            //margin-right: 5px;
         }
       }
     }
@@ -110,13 +116,13 @@
 }
 
 // remove default styling for links
-a:link, a:visited {
-	text-decoration: none;
-}
+a:link, a:visited {	text-decoration: none; }
 
 // set up default font
 body {
   .OffScreenPage;
+  background-color: @tc-grey2;
+  color: @tc-offwhite;
 }
 
 html {
@@ -124,9 +130,15 @@ html {
   position: relative;
   margin:0;
   height:100%;
+  font-family: @default-font;
 }
 
-// more styling for the jumbotron-ish thing
+@media(max-width: 1024px){ // hack for now, proper @media queries coming soon!
+  body {
+    overflow-x: auto;
+  }
+}
+
 #greeting {
   .Center;
   top: 60%;
@@ -151,10 +163,8 @@ html {
   }
 }
 
-// Conway's game of life stylings
-#canvas {
-  position: relative;
-}
+/* Conway's game of life stylings */
+#canvas { position: relative;}
 
 #conway-info-button {
   position: relative;
@@ -196,71 +206,99 @@ html {
   z-index: 10000;
 }
 
-/* about page specific styles */
-.GrayHover {
-  &:hover {
-    background-color: #ddd;
+/* About styling */
+#about-icon { // make mixins for this later
+  height: 64px;
+  width: 64px;
+  display: block;
+  margin:0 auto;
+}
+
+#about-title { // make mixins for this later
+  padding-top: 50px;
+  text-align: center;
+
+  & > h1 {
+    margin-bottom: 30px;
+    padding-bottom: 3px;
+    border-bottom: 2px solid @tc-lightblue;
+    color: @tc-pink;
+    display: inline-block;
   }
 }
 
-#quick-stats {
-  display:inline-block;
-  padding: 10px;
-  float:left;
-  height:100%;
-  width: 25%;
-  min-width: 300px;
+#about {
+  margin-bottom: 300px;
+  //padding-bottom: 48px;
+}
 
-  & > h2 {
-    font-size: 1em;
-    margin-bottom: -10px;
+#about-table {
+  width: 960px;
+  height: 352px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 50px;
+
+  // style links inside table
+  td > p > a {
+    color: @tc-blue;
   }
 
-  & > ul {
-    font-size: 0.90em;
-    list-style-type: none;
+  // styling for headers
+  tr:nth-child(1) > td:nth-child(1),
+  tr:nth-child(1) > td:nth-child(2),
+  tr:nth-child(4) > td:nth-child(2){
+    max-height: 50px;
+    color: @tc-lightblue;
+  }
 
-    & > li {
-      float: left;
-      background-color: #ddd;
-      padding: 6px;
-      margin: 6px;
+  // positioning adjustments
+  tr:nth-child(2) > td:nth-child(1),
+  tr:nth-child(2) > td:nth-child(2),
+  tr:nth-child(3) > td:nth-child(2) {
+    margin-top: -15px;
+  }
+  tr:nth-child(3) > td:nth-child(2){
+    margin-top: -90px;
+  }
+  tr:nth-child(4) > td:nth-child(2){
+    margin-top: -250px;
+  }
 
-      // enable tagging functionality
-      &:hover {
-        //cursor:pointer;
+  // skill set styles
+  td:nth-child(1), td:nth-child(2){
+    display:inline-block;
+    padding: 15px;
+    width: 25%;
+    min-width: 300px;
+
+    & > h2 {
+      font-size: 1em;
+      margin-bottom: -10px;
+    }
+
+    & > ul {
+      font-size: 0.90em;
+      list-style-type: none;
+
+      & > li {
+        float: left;
+        font-family: 'Fira Mono';
+        background-color: @tc-black;
+        color: @tc-pink;
+        padding: 6px;
+        margin: 6px;
       }
     }
   }
 }
 
-#personal-bio, #social-media {
-  display:inline-block;
-  padding: 10px;
-  min-width: 240px;
-  margin-left: 20px;
-  height: 100%;
-  width: 30%;
-}
-
 // want to show/hide this picture in the future
 #banner {
-  display: inline-block;
   margin-top: 5%;
-  margin-right: 10%;
+  padding-left: 30px;
   max-height: 400px;
   float: right;
-}
-
-#about {
-  margin-bottom: 48px;
-  padding-bottom: 48px;
-}
-
-#about-wrapper {
-  //margin-top: -0px;
-  min-width: 240px;
-  margin-left: 128px;
 }
 
 .icon {
@@ -269,31 +307,60 @@ html {
   margin-right: 10px;
 }
 
-#github {
-  border-radius: 9999px;
-  .GrayHover;
-}
-
-#linkedin {
-  border-radius: 6px;
-  .GrayHover;
-}
-
 /* projects styling */
+#project-icon{
+  height: 64px;
+  width: 64px;
+  display: block;
+  margin:0 auto;
+}
+
+#projects {
+  background-color: #fff;
+  padding-bottom: 70px; // incorrect scrolling after this, fix later
+}
+
 #projects-title {
   padding-top: 50px;
   text-align: center;
+
+  & > h1 {
+    margin-bottom: 30px;
+    padding-bottom: 3px;
+    color: @tc-darkgrey;
+    border-bottom: 2px solid @tc-red;
+    display: inline-block;
+  }
 }
 
-#projects-table {
-  margin-left: 10%;
-  td:first-child {
-    padding-bottom: 10%;
-    text-align: center;
+#projects-carousel {
+  width: 960px;
+  height: 352px;
+  display: block;
+  margin: 0 auto;
+  background-color: #fff;
+}
+
+.project-description {
+  color: @tc-darkgrey;
+  & > h2 {
+    color: @tc-red;
+    margin-bottom: -10px;
   }
-  td:nth-child(2)
-  {
-    padding-left: 5%;
-    max-width: 375px;
+}
+
+.projects-table {
+  td {
+    padding: 10px;
   }
+}
+
+.slick-prev:before {
+  color: @tc-red;
+  font-size: 25px;
+}
+
+.slick-next:before {
+  color: @tc-red;
+  font-size: 25px;
 }

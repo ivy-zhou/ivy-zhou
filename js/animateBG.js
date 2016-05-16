@@ -141,7 +141,24 @@ function animateBackground () {
         window.addEventListener('click', onClick);
     }
 
-    // don't animate if we're not being looked at
+    // create an overlay over the canvas once, and don't allow clicks anymore!
+    function drawOverlay() {
+      if(!overlayPresent)
+      {
+        ctx.globalAlpha = 0.25;
+        ctx.fillStyle = DISABLED_COLOUR;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalAlpha = 1;
+        overlayPresent = true;
+      }
+    }
+
+    function clearOverlay() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      overlayPresent = false;
+    }
+
+    // don't animate if we're not being looked at, and don't click either
     function scrollCheck() {
         if(document.body.scrollTop > height)
           isPlaying = false;
@@ -160,37 +177,31 @@ function animateBackground () {
       isPlaying = false;
       clearInterval(interval);
 
+      // check if the page has scrolled!
+      if(document.body.scrollTop > height)
+        return;
+      offsetY = document.body.scrollTop;
+
       // check if the nav-tab is pushed out or if the Conway button was clicked
       if(!$("#nav-tab").hasClass("closed"))
       {
-        // create an overlay over the canvas once, and don't allow clicks anymore!
-        if(!overlayPresent)
-        {
-          ctx.globalAlpha = 0.25;
-          ctx.fillStyle = DISABLED_COLOUR;
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          ctx.globalAlpha = 1;
-          overlayPresent = true;
-        }
+        drawOverlay();
         return;
       }
       else
-      {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        overlayPresent = false;
-      }
+        clearOverlay();
 
-      // don't let them click cells under the nav-tab
+      // don't let them click cells under the nav-tab, or the question mark
       var ntabPos = $("#nav-tab").position();
-      if(event.clientX >= ntabPos.left && event.clientX <= ntabPos.left + CELL_SIZE &&
-        event.clientY >= ntabPos.top && event.clientY <= ntabPos.top + CELL_SIZE)
+      if((event.clientX >= ntabPos.left && event.clientX <= ntabPos.left + CELL_SIZE &&
+          event.clientY >= ntabPos.top && event.clientY <= ntabPos.top + CELL_SIZE))
       {
         draw();
         return;
       }
 
       var col = Math.floor(event.clientX / CELL_SIZE);
-      var row = Math.floor(event.clientY / CELL_SIZE);
+      var row = Math.floor((event.clientY + offsetY) / CELL_SIZE);
 
       if(isInBounds(row, col))
       {

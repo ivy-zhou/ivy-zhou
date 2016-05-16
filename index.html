@@ -24,7 +24,7 @@
         <!-- fonts -->
         <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
-
+        <link href='https://fonts.googleapis.com/css?family=Fira+Mono' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Bootstrap
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -38,13 +38,15 @@
         <link rel="stylesheet" href="css/normalize.css">
         <!-- <link rel="stylesheet" href="css/animate.css"> -->
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
         <link rel="stylesheet" href="css/styles.css">
 
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
         <!-- off screen site navigation -->
-        <img src = "img/menu-icon-dark.svg" id = "nav-tab" class = "closed" onclick = "toggleNav()"/>
+        <img src = "img/menu-icon-dark.svg" id = "nav-tab" class = "closed"/>
         <nav id = "nav">
           <h2>Menu</h2>
           <ul>
@@ -65,7 +67,7 @@
             <div id = "greeting">
               <h1 class = "title">Ivy <b>Zhou</b></h1>
               <p>Developer, writer, and funny on occasion.</p>
-              <button id = "conway-info-button" onclick = toggleConwayInfo()>?</button>
+              <button id = "conway-info-button">?</button>
               <div id = "conway-info" class = "hidden">
                 <span>Press <span>[p]</span> to start/stop Conway's Game of Life.</span>
               </div>
@@ -74,99 +76,179 @@
 
           <!-- projects -->
           <div id = "projects">
-            <h1 id = "projects-title">Projects</h1>
-            <table id = "projects-table">
+            <div id = "projects-title">
+              <img src = "img/project-icon-highlight.svg" id = "project-icon"/>
+              <h1>Projects</h1>
+            </div>
+          <div id="projects-carousel">
+            <div><table class = "projects-table">
               <tr>
-                <td><img src = "img/scrabble1.gif" alt "Scrabble" width = "300px" height = "300px"/>
-                    <img src = "img/scrabble2.gif" alt "Scrabble" width = "300px" height = "300px"/>
-                </td>
-                <td><h2>Scrabble</h2>
-                    <p>A Scrabble clone written in Java. Supports tile shuffle/exchange/recall, in-game help, player vs. player,
-                      and player vs. computer.</p>
+                <td><img src = "img/scrabble1.gif" alt "Scrabble" width = "300px" height = "300px"/></td>
+                <td><img src = "img/scrabble2.gif" alt "Scrabble" width = "300px" height = "300px"/></td>
+                <td class = "project-description">
+                  <h2>Scrabble</h2>
+                  <p>A Scrabble clone written in Java. Supports tile shuffle/exchange/recall, in-game help, player vs. player,
+                    and player vs. computer.</p>
                 </td>
               </tr>
+            </table></div>
+            <div><table class = "projects-table">
               <tr>
-                <td><img src = "img/wordpress.gif" alt "Wordpress Theme" width = "600px" height = "300px"/></td>
-                <td><h2>Glasses Wordpress Theme</h2>
-                    <p>A simple Wordpress Theme supporting tagging, time-stamped posts, and customizable menu links.</p>
+                <td><img src = "img/wordpress.gif" alt "Glasses Wordpress Theme" width = "600px" height = "300px"/></td>
+                <td class = "project-description">
+                  <h2>Glasses</h2>
+                  <p>A simple Wordpress Theme supporting tagging, time-stamped posts, and customizable menu links.</p>
                 </td>
               </tr>
+            </table></div>
+            <div><table class = "projects-table">
               <tr>
                 <td><img src = "img/zaplug.gif" alt "Zaplug Game" height = "300px"/></td>
-                <td><h2>ZAPLUG!!!</h2>
-                    <p>A 2D platform game under development where you play as a zappy sort of plug!
-                      Implemented on the HTML5 canvas, and featuring mildly believable physics.</p>
+                <td class = "project-description">
+                  <h2>ZAPLUG!!!</h2>
+                  <p>A 2D platform game under development where you play as a zappy sort of plug!
+                     Implemented on the HTML5 canvas, and featuring mildly believable physics.</p>
                 </td>
               </tr>
+            </table></div>
+            <div><table class = "projects-table">
               <tr>
-                <td><img src = "img/bopit.gif" alt "Zaplug Game" height = "300px"/></td>
-                <td><h2>ORB IT!</h2>
-                    <p>An adaptation of the popular children's toy, Bop It! using the Orbit Booster Pack
-                    and the Tiva C LaunchPad. Also integrates with Processing code to support sound
-                    effects.</p>
+                <td><img src = "img/bopit.gif" alt "Bop it!" height = "300px"/></td>
+                <td class = "project-description">
+                  <h2>ORB IT!</h2>
+                  <p>An adaptation of the popular children's toy, Bop It! using the Orbit Booster Pack
+                     and the Tiva C LaunchPad. Also integrates with Processing code to support sound
+                     effects.</p>
                 </td>
+              </table></div>
               </tr>
-            </table>
-          </div>
+          </div> <!-- end carousel -->
+        </div> <!-- end projects -->
 
-          <!-- about -->
-          <div id = "about">
-            <!-- quick stats column -->
-            <div id = "about-wrapper">
-            <div id = "quick-stats">
-                <h1>Skill Set</h1>
+        <!-- about -->
+        <div id = "about">
+          <div id = "about-title">
+            <img src = "img/about-icon-highlight.svg" id = "about-icon"/>
+            <h1>About</h1>
+          </div>
+          <table id = "about-table">
+            <tr>
+              <td><h1>Skills</h1></td>
+              <td><h1>Bio</h1></td>
+              <td rowspan = "4"><img src = "img/ivyzhou_banner1.jpg" id = "banner" alt = "Ivy Zhou"/></td>
+            </tr>
+            <tr>
+              <td>
                 <h2>Languages</h2>
                 <ul class = "languages cloud">
                   <li class = "proficient">Java</li><li class = "proficient">JavaScript</li>
                   <li class = "proficient">jQuery</li><li class = "familiar">Python</li>
                   <li class = "learning">PHP</li><li class = "learning">MySQL</li>
                   <li class = "proficient">C</li><li class = "familiar">C++</li>
-                </ul><br><br><br><br><br><br> <!-- change this later -->
+                </ul>
+              </td>
+              <td>
+                <p>
+                  Ivy Zhou is a Software Engineering student at the University of Waterloo
+                  who speaks some dialects of computer. She's a quick study, a team player,
+                  and very lucky to be studying a field that she's passionate about.
+                </p>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
                 <h2>Markup</h2>
                 <ul class = "markup cloud">
                   <li class = "proficient">HTML</li><li class = "proficient">CSS</li>
                   <li class = "proficient">LESS</li><li class = "learning">SASS</li>
-                </ul><br><br>
+                </ul>
+              </td>
+              <td>
+                <p>
+                  Want to work on something together?
+                  <a href = "mailto:ivyzhou2012@hotmail.com">Contact me</a> or have a gander at
+                  <a href = "IvyZhou_Resume.pdf" download>my resume.</a>
+                </p>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>
                 <h2>Tools</h2>
                 <ul class = "software cloud">
                   <li class = "proficient">Git</li><li class = "proficient">AutoCAD</li>
                   <li class = "proficient">SketchUp</li><li class = "learning">Grunt</li>
                   <li class = "proficient">Adobe Illustrator</li><li class = "familiar">Adobe Photoshop</li>
                 </ul>
-            </div>
+              </td>
+              <td>
+                <h1>Find me on</h1>
+                  <a href = "https://github.com/ivy-zhou">
+                    <img src = "img/github.svg" class = "icon" alt = "GitHub"/></a>
+                  <a href = "https://ca.linkedin.com/in/zhouivy">
+                    <img src = "img/linkedin.svg" class = "icon" alt = "LinkedIn"/></a>
+              </td>
+              <td></td>
+            </tr>
+          </table>
+          <!-- quick stats column -->
+          <!-- <div id = "about-wrapper">
+          <div id = "quick-stats">
+              <h1>Skill Set</h1>
+              <h2>Languages</h2>
+              <ul class = "languages cloud">
+                <li class = "proficient">Java</li><li class = "proficient">JavaScript</li>
+                <li class = "proficient">jQuery</li><li class = "familiar">Python</li>
+                <li class = "learning">PHP</li><li class = "learning">MySQL</li>
+                <li class = "proficient">C</li><li class = "familiar">C++</li>
+              </ul><br><br><br><br><br><br>
+              <h2>Markup</h2>
+              <ul class = "markup cloud">
+                <li class = "proficient">HTML</li><li class = "proficient">CSS</li>
+                <li class = "proficient">LESS</li><li class = "learning">SASS</li>
+              </ul><br><br>
+              <h2>Tools</h2>
+              <ul class = "software cloud">
+                <li class = "proficient">Git</li><li class = "proficient">AutoCAD</li>
+                <li class = "proficient">SketchUp</li><li class = "learning">Grunt</li>
+                <li class = "proficient">Adobe Illustrator</li><li class = "familiar">Adobe Photoshop</li>
+              </ul>
+          </div> -->
 
-            <!-- personal bio column -->
-            <div id = "personal-bio">
-              <h1>About</h1>
-              <p>
-                Ivy Zhou is a Software Engineering student at the University of Waterloo
-                who speaks some dialects of computer. She's a quick study, a team player,
-                and very lucky to be studying in a field that she's passionate about.
-              </p>
-              <p>
-                Want to work on something together?
-                <a href = "mailto:ivyzhou2012@hotmail.com">Contact me</a> or have a gander at
-                <a href = "IvyZhou_Resume.pdf" download>my resume.</a>
-              </p>
-            </div>
-
-            <img src = "img/ivyzhou_banner1.jpg" id = "banner" alt = "Ivy Zhou"/>
-
-            <div id = "social-media">
-              <h1>Find me on</h1>
-                <a href = "https://github.com/ivy-zhou">
-                  <img src = "img/github-icon.png" id = "github" class = "icon" alt = "GitHub"/></a>
-                <a href = "https://ca.linkedin.com/in/zhouivy">
-                  <img src = "img/linkedin-icon.png" id = "linkedin" class = "icon" alt = "LinkedIn"/></a>
-            </div>
-
+          <!-- personal bio column -->
+          <!-- <div id = "personal-bio">
+            <h1>About</h1>
+            <p>
+              Ivy Zhou is a Software Engineering student at the University of Waterloo
+              who speaks some dialects of computer. She's a quick study, a team player,
+              and very lucky to be studying a field that she's passionate about.
+            </p>
+            <p>
+              Want to work on something together?
+              <a href = "mailto:ivyzhou2012@hotmail.com">Contact me</a> or have a gander at
+              <a href = "IvyZhou_Resume.pdf" download>my resume.</a>
+            </p>
           </div>
+
+          <img src = "img/ivyzhou_banner1.jpg" id = "banner" alt = "Ivy Zhou"/>
+
+          <div id = "social-media">
+            <h1>Find me on</h1>
+              <a href = "https://github.com/ivy-zhou">
+                <img src = "img/github-icon.png" id = "github" class = "icon" alt = "GitHub"/></a>
+              <a href = "https://ca.linkedin.com/in/zhouivy">
+                <img src = "img/linkedin-icon.png" id = "linkedin" class = "icon" alt = "LinkedIn"/></a>
           </div>
+
+        </div> -->
+        </div>
         </div> <!--- end of main content -->
 
         <!-- scripts -->
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
         <script src="js/jquery.touchSwipe.min.js"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
         <script src="js/animateBG.js"></script>
