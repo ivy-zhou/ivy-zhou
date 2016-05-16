@@ -2,7 +2,6 @@
  * Version - 0.0.0 - Dec 28, 2015
  * Ivy Zhou
  * Functionality for offscreen navigation, works by swiping as well
- * Animates level of profieceny on each skill
  * Hides/shows info on the Conway cavnas
  * Scrolls to sections from menu bar
  * Highlights and unhighlights title sections
@@ -32,7 +31,6 @@
 $("#nav-tab").click(function(){
     if($("#nav-tab").attr("class") == "closed")
       openNav();
-    // close out nav if we're open right now
     else
       closeNav();
     $("#nav-tab").toggleClass("closed"); // change states so we know what to do next time
@@ -68,37 +66,7 @@ $('#conway-info-button').click(function(){
   }
 );
 
-// animate tags on about page, need a more specific selector in the future
-// need to figure out how to dynamically resize li objects to create slide-in, slide-out effect!
-$('#quick-stats > ul > li').hover(
-  function() // hover in
-  {
-    if($(this).hasClass('proficient')){
-    // append "proficient", "familiar", "learning" tags
-      var object = this;
-      // $(object).append(" | Proficient");
-      $(object).css("background-color", "#59CD90");
-
-      // implement resize with animation later
-      // $(object).css({'width': $(object).width() + 'px'});
-    }
-    if($(this).hasClass('familiar')){
-      $(this).css("background-color", "#FFCB47");
-    }
-    if($(this).hasClass('learning')){
-      $(this).css("background-color", "#EE6352");
-    }
-  },
-  function() //hover out
-  {
-    if($(this).hasClass('proficient') || $(this).hasClass('familiar') ||
-      $(this).hasClass('learning')){
-      // $(this).html($(this).html().split(" | Proficient").join(""));
-      // $(this).css({'width': $(this).width() + 'px'});
-      $(this).css("background-color", "#ddd");
-    }
-  }
-);
+// animate tags on about page?
 
 // projects carousel using slick
 $("#projects-carousel").slick({
@@ -109,4 +77,10 @@ $("#projects-carousel").slick({
 $(document).ready(function() {
   if(localStorage.getItem("cButtonClicked") !== null)
     $("#conway-info-button").addClass("NoAnimation");
+
+  // reizes the projects and about sections to fit the browser window
+  $('#projects').css("height", $(window).height() + "px");
+  $('#projects').css("width", $(window).width() + "px");
+  $('#about').css("height", $(window).height() + "px");
+  $('#about').css("width", $(window).width() + "px");
 });

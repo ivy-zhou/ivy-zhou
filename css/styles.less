@@ -1,5 +1,3 @@
-// out: ../css/styles.css, sourcemap: false, compress: false
-
 /*
  * Version - 0.0.0 - Dec 28, 2015
  * Ivy Zhou
@@ -7,8 +5,7 @@
  */
 
 /* theme colour scheme generated at coolors.co */
-// irrelevant due to black and white color scheme but oh well
-@tc-offwhite: #ABB2BF; // off white, used on titles
+@tc-offwhite: #ABB2BF;
 @tc-darkgrey: #282C34;
 @tc-grey2: #2F343D;
 @tc-blue: #528BFF;
@@ -19,12 +16,12 @@
 @tc-yellow: #E5C07B;
 @tc-pink: #E06C75;
 @tc-black: #0F1011;
+@tc-white: #fff;
 @navbar-color: #0F1011;
 @navbar-link-color: @tc-offwhite;
 @conway-info-button-bg: @tc-black;
 
-
-/* default fonts */
+/* default font */
 @default-font: 'Open Sans', sans-serif;
 
 /* constants for sizes */
@@ -36,9 +33,8 @@
 //   outline: 1px solid red;
 // }
 
-/* these mixins are not the most necessary, but contain useful bits of reusable code */
-// makeshift jumbotron-type centering trick
-.Center {
+/* Mixins */
+.Center { // Jumbotron-type centering trick
   position:absolute;
   top: 50%;
   left: 50%;
@@ -47,8 +43,7 @@
   transform: translate3d(-50%,-50%,0);
 }
 
-// off screen site navigation bar styling
-.OffScreenPage {
+.OffScreenPage { // off screen site navigation bar styling
   min-width: 384px;
   position: relative;
   overflow-x: hidden;
@@ -56,16 +51,14 @@
   height:100%;
 }
 
-// assumes your nav options are in a ul, 4 levels is pushing it a little
-.OffScreenNav {
+.OffScreenNav { // assumes your nav options are in a ul
   position:fixed;
   left: -@navbar-width;
   width: @navbar-width;
   height: 100%;
   background: @navbar-color;
 
-  // description of links styling
-  & > h2 {
+  & > h2 { // description of links styling
     color: @tc-darkorange;
     padding: 30% 10% 10% 10%;
     margin-left: 5%;
@@ -74,19 +67,16 @@
     font-size: 1.25em;
   }
 
-  // option list styling
-  & > ul {
+  & > ul { // option list styling
     list-style: none;
     margin: 0;
     padding: 0;
 
-    // list items styling
-    & > li {
+    & > li { // list items styling
       cursor: pointer; // you can click the whole box!
       &:hover { background-color: @navbar-link-color; }
 
       & > a {
-        //outline: 1px red solid;
         display:block;
         height:100%;
         width: 85%;
@@ -101,11 +91,29 @@
             background-color: @tc-grey2;
             color: @tc-darkorange;
             border-left: 5px solid @tc-blue;
-            //margin-right: 5px;
         }
       }
     }
   }
+}
+
+.SectionTitle(@border-colour:@tc-offwhite,
+              @text-colour:@tc-offwhite) {
+  padding-top: 50px;
+  text-align: center;
+
+  & > h1 {
+    margin-bottom: 30px;
+    padding-bottom: 3px;
+    border-bottom: 2px solid @border-colour;
+    color: @text-colour;
+    display: inline-block;
+  }
+}
+
+.IconSize {
+  width: 64px;
+  height: 64px;
 }
 
 .NoAnimation {
@@ -118,7 +126,6 @@
 // remove default styling for links
 a:link, a:visited {	text-decoration: none; }
 
-// set up default font
 body {
   .OffScreenPage;
   background-color: @tc-grey2;
@@ -151,8 +158,7 @@ html {
   }
   & > p { margin-top: -25px; }
   & > button { margin-top: 10px; }
-  // conway info
-  & > div {
+  & > div { // conway info
     margin-top: 100px;
     opacity: 0;
     padding: 10px;
@@ -164,7 +170,7 @@ html {
 }
 
 /* Conway's game of life stylings */
-#canvas { position: relative;}
+#canvas { position: relative; }
 
 #conway-info-button {
   position: relative;
@@ -191,45 +197,30 @@ html {
 @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 @keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 
-// navigation styling
+/* Navigation styling */
 #nav {
   .OffScreenNav;
 }
 
-// navigation icon tab styling
-#nav-tab {
+#nav-tab { // navigation icon tab styling
   cursor: pointer;
   position: fixed;
   float: left;
-  width: 64px;
-  height: 64px;
+  .IconSize;
   z-index: 10000;
 }
 
 /* About styling */
 #about-icon { // make mixins for this later
-  height: 64px;
-  width: 64px;
+  .IconSize;
   display: block;
   margin:0 auto;
 }
 
-#about-title { // make mixins for this later
-  padding-top: 50px;
-  text-align: center;
-
-  & > h1 {
-    margin-bottom: 30px;
-    padding-bottom: 3px;
-    border-bottom: 2px solid @tc-lightblue;
-    color: @tc-pink;
-    display: inline-block;
-  }
-}
+#about-title { .SectionTitle(@tc-lightblue, @tc-pink); }
 
 #about {
   margin-bottom: 300px;
-  //padding-bottom: 48px;
 }
 
 #about-table {
@@ -238,6 +229,13 @@ html {
   display: block;
   margin: 0 auto;
   margin-bottom: 50px;
+
+  // style Find Me on icons
+  td > a > img {
+    height: 48px;
+    width: 48px;
+    margin-right: 5%;
+  }
 
   // style links inside table
   td > p > a {
@@ -293,7 +291,6 @@ html {
   }
 }
 
-// want to show/hide this picture in the future
 #banner {
   margin-top: 5%;
   padding-left: 30px;
@@ -301,44 +298,26 @@ html {
   float: right;
 }
 
-.icon {
-  width: 48px;
-  height: 48px;
-  margin-right: 10px;
-}
-
-/* projects styling */
+/* Projects styling */
 #project-icon{
-  height: 64px;
-  width: 64px;
+  .IconSize;
   display: block;
   margin:0 auto;
 }
 
 #projects {
-  background-color: #fff;
-  padding-bottom: 70px; // incorrect scrolling after this, fix later
+  background-color: @tc-white;
+  padding-bottom: 70px;
 }
 
-#projects-title {
-  padding-top: 50px;
-  text-align: center;
-
-  & > h1 {
-    margin-bottom: 30px;
-    padding-bottom: 3px;
-    color: @tc-darkgrey;
-    border-bottom: 2px solid @tc-red;
-    display: inline-block;
-  }
-}
+#projects-title { .SectionTitle(@tc-red, @tc-darkgrey) }
 
 #projects-carousel {
   width: 960px;
   height: 352px;
   display: block;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: @tc-white;
 }
 
 .project-description {
@@ -355,6 +334,7 @@ html {
   }
 }
 
+/* Slick styles */
 .slick-prev:before {
   color: @tc-red;
   font-size: 25px;

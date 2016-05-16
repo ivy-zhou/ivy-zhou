@@ -229,7 +229,6 @@ function animateBackground () {
     }
 
     function draw () {
-        //ctx.clearRect(0,0, canvas.width, canvas.height);
         for(var i = 0; i < noOfRows; i++)
         {
           for(var j = 0; j < noOfCols; j++)
