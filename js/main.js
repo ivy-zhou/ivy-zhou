@@ -79,8 +79,8 @@ $(document).ready(function() {
     $("#conway-info-button").addClass("NoAnimation");
 
   // reizes the projects and about sections to fit the browser window
-  $('#projects').css("height", $(window).height() + "px");
-  $('#projects').css("width", $(window).width() + "px");
-  $('#about').css("height", $(window).height() + "px");
-  $('#about').css("width", $(window).width() + "px");
+  // $('#projects').css("height", $(window).height() + "px");
+  // $('#projects').css("width", $(window).width() + "px");
+  // $('#about').css("height", $(window).height() + "px");
+  // $('#about').css("width", $(window).width() + "px");
 });

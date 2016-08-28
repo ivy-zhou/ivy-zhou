@@ -272,7 +272,7 @@ function animateBackground () {
         else
         {
           isPlaying = true;
-          interval = setInterval(animate, 1000);
+          interval = setInterval(animate, 500);
         }
       }
     });
