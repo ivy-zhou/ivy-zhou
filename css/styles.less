@@ -223,15 +223,31 @@ html {
   margin-bottom: 300px;
 }
 
-#about-table {
-  width: 960px;
+#about-container {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+
+  // display: flex;
+  flex-flow: row wrap;
+  // justify-content: center;
+}
+
+.about-table {
+  width: 300px;
   height: 352px;
   display: block;
-  margin: 0 auto;
-  margin-bottom: 50px;
+  padding-right: 30px;
+  margin-bottom: 200px;
+
+  th {
+    text-align: left;
+    color: @tc-lightblue;
+  }
 
   // style Find Me on icons
-  td > a > img {
+  a > img {
     height: 48px;
     width: 48px;
     margin-right: 5%;
@@ -313,25 +329,33 @@ html {
 #projects-title { .SectionTitle(@tc-red, @tc-darkgrey) }
 
 #projects-carousel {
-  width: 960px;
-  height: 352px;
+  //width: 960px;
+  height: 500px;
   display: block;
-  margin: 0 auto;
+  //margin: 0 auto;
+  margin: 0 64px 0 64px;
   background-color: @tc-white;
 }
 
 .project-description {
+  //position: absolute;
   color: @tc-darkgrey;
   & > h2 {
     color: @tc-red;
     margin-bottom: -10px;
   }
+  width: 300px;
+  //display: none;
+  //padding-left: 30px;
 }
 
-.projects-table {
-  td {
-    padding: 10px;
-  }
+.projects-container {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  //flex-flow: row wrap;
 }
 
 /* Slick styles */

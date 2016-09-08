@@ -73,6 +73,15 @@ $("#projects-carousel").slick({
   dots: true
 });
 
+// // fade in projects display
+// $(".projects-container > img").mouseenter(function() {
+//   console.log("you moused me over!");
+//   //this.animate({filter: "greyscale(100%)"}, 200);
+//   $(".project-description").show();
+// }).mouseleave(function() {
+//   $(".project-description").hide();
+// });
+
 // creates the appropriate animations to start
 $(document).ready(function() {
   if(localStorage.getItem("cButtonClicked") !== null)

@@ -73,57 +73,47 @@
               <h1>Projects</h1>
             </div>
           <div id="projects-carousel">
-            <div><table class = "projects-table">
-              <tr>
-                <td><img src = "img/timetasker.gif" alt "Scrabble" height = "300px"/></td>
-                <td class = "project-description">
+            <div class = "projects-container">
+                <img src = "img/timetasker.gif" alt "Scrabble" height = "300px"/>
+                <div class = "project-description">
                   <h2>Time tasker</h2>
                   <p>A Chrome desktop app that helps you keep track of your tasks, and more importantly,
                     lets you put a scary countdown timer on each one.</p>
-                </td>
-              </tr>
-            </table></div>
-            <div><table class = "projects-table">
-              <tr>
-                <td><img src = "img/scrabble1.gif" alt "Scrabble" width = "300px" height = "300px"/></td>
-                <td><img src = "img/scrabble2.gif" alt "Scrabble" width = "300px" height = "300px"/></td>
-                <td class = "project-description">
+                </div>
+            </div>
+            <div class = "projects-container">
+                <img src = "img/scrabble1.gif" alt "Scrabble" width = "300px" height = "300px"/>
+                <!-- <img src = "img/scrabble2.gif" alt "Scrabble" width = "300px" height = "300px"/> -->
+                <div class = "project-description">
                   <h2>Scrabble</h2>
                   <p>A Scrabble clone written in Java. Supports tile shuffle/exchange/recall, in-game help, player vs. player,
                     and player vs. computer.</p>
-                </td>
-              </tr>
-            </table></div>
-            <div><table class = "projects-table">
-              <tr>
-                <td><img src = "img/wordpress.gif" alt "Glasses Wordpress Theme" width = "600px" height = "300px"/></td>
-                <td class = "project-description">
+                </div>
+            </div>
+            <div class = "projects-container">
+                <img src = "img/wordpress.gif" alt "Glasses Wordpress Theme" width = "600px" height = "300px"/>
+                <div class = "project-description">
                   <h2>Glasses</h2>
                   <p>A simple Wordpress Theme supporting tagging, time-stamped posts, and customizable menu links.</p>
-                </td>
-              </tr>
-            </table></div>
-            <div><table class = "projects-table">
-              <tr>
-                <td><img src = "img/zaplug.gif" alt "Zaplug Game" height = "300px"/></td>
-                <td class = "project-description">
+                </div>
+            </div>
+            <div class = "projects-container">
+                <img src = "img/zaplug.gif" alt "Zaplug Game" height = "300px"/>
+                <div class = "project-description">
                   <h2>ZAPLUG!!!</h2>
                   <p>A 2D platform game under development where you play as a zappy sort of plug!
                      Implemented on the HTML5 canvas, and featuring mildly believable physics.</p>
-                </td>
-              </tr>
-            </table></div>
-            <div><table class = "projects-table">
-              <tr>
-                <td><img src = "img/bopit.gif" alt "Bop it!" height = "300px"/></td>
-                <td class = "project-description">
+                </div>
+            </div>
+            <div class = "projects-container">
+                <img src = "img/bopit.gif" alt "Bop it!" height = "300px"/>
+                <div class = "project-description">
                   <h2>ORB IT!</h2>
                   <p>An adaptation of the popular children's toy, Bop It! using the Orbit Booster Pack
                      and the Tiva C LaunchPad. Also integrates with Processing code to support sound
                      effects.</p>
-                </td>
-              </table></div>
-              </tr>
+                </div>
+            </div>
           </div> <!-- end carousel -->
         </div> <!-- end projects -->
 
@@ -133,12 +123,9 @@
             <img src = "img/about-icon-highlight.svg" id = "about-icon"/>
             <h1>About</h1>
           </div>
-          <table id = "about-table">
-            <tr>
-              <td><h1>Skills</h1></td>
-              <td><h1>Bio</h1></td>
-              <td rowspan = "4"><img src = "img/ivyzhou_banner1.jpg" id = "banner" alt = "Ivy Zhou"/></td>
-            </tr>
+          <div id="about-container">
+          <table id = "skills" class = "about-table">
+            <th><h1>Skills</h1></th>
             <tr>
               <td>
                 <h2>Languages</h2>
@@ -148,14 +135,6 @@
                   <li>C</li><li>C++</li>
                 </ul>
               </td>
-              <td>
-                <p>
-                  Ivy Zhou is a Software Engineering student at the University of Waterloo
-                  who speaks some dialects of computer. She's a quick study, a team player,
-                  and very lucky to be studying a field that she's passionate about.
-                </p>
-              </td>
-              <td></td>
             </tr>
             <tr>
               <td>
@@ -165,14 +144,6 @@
                   <li>LESS</li>
                 </ul>
               </td>
-              <td>
-                <p>
-                  Want to work on something together?
-                  <a href = "mailto:ivyzhou2012@hotmail.com">Contact me</a> or have a gander at
-                  <a href = "IvyZhou_Resume.pdf" download>my resume.</a>
-                </p>
-              </td>
-              <td></td>
             </tr>
             <tr>
               <td>
@@ -183,16 +154,32 @@
                   <li>Adobe Illustrator</li><li>Adobe Photoshop</li>
                 </ul>
               </td>
-              <td>
-                <h1>Find me on</h1>
-                  <a href = "https://github.com/ivy-zhou">
-                    <img src = "img/github.svg" class = "icon" alt = "GitHub"/></a>
-                  <a href = "https://ca.linkedin.com/in/zhouivy">
-                    <img src = "img/linkedin.svg" class = "icon" alt = "LinkedIn"/></a>
-              </td>
-              <td></td>
             </tr>
-          </table>
+          </table> <!-- end of skills table -->
+          <table id = "bio" class = "about-table">
+            <th><h1>Bio</h1></th>
+            <tr><td>
+             <p>
+               Ivy Zhou is a Software Engineering student at the University of Waterloo
+               who speaks some dialects of computer. She's a quick study, a team player,
+               and very lucky to be studying a field that she's passionate about.
+             </p>
+             <p>
+               Want to work on something together?
+               <a href = "mailto:ivyzhou2012@hotmail.com">Contact me</a> or have a gander at
+               <a href = "IvyZhou_Resume.pdf" download>my resume.</a>
+             </p>
+            </td></tr>
+            <th><h1>Find me on</h1></th>
+            <tr><td>
+              <a href = "https://github.com/ivy-zhou">
+                  <img src = "img/github.svg" class = "icon" alt = "GitHub"/></a>
+              <a href = "https://ca.linkedin.com/in/zhouivy">
+                <img src = "img/linkedin.svg" class = "icon" alt = "LinkedIn"/></a>
+            </td></tr>
+          </table> <!-- end of bio table -->
+          <img src = "img/ivyzhou_banner1.jpg" id = "banner" alt = "Ivy Zhou"/>
+        </div> <!-- end of about container -->
         </div> <!-- end of about -->
         </div> <!--- end of main content -->
 
