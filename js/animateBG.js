@@ -1,14 +1,9 @@
-/*
- * Version - 0.0.0 - Dec 28, 2015
- * Ivy Zhou
- * Conway's Game of Life Background
- */
 
- var CELL_SIZE = 64; // need code to adjust this for differently sized screens so I don't run out of memory
+ var CELL_SIZE = 64;
  var DEAD = false;  // false - dead, true - alive for cells
  var ALIVE = true;
- var ALIVE_COLOUR = "#282C34"; //75ABBC
- var DEAD_COLOUR = "#2F343D";
+ var ALIVE_COLOUR = "#FED99B"; // "#282C34"; //75ABBC
+ var DEAD_COLOUR = "#FED18C"; // "#2F343D";
  var GRID_COLOUR = "#ddd";
  var DISABLED_COLOUR = "#ABB2BF";
  var STARTING_POPULATION = 0.75;
@@ -98,12 +93,13 @@ function drawGrid () {
 
 function animateBackground () {
   // main
-  canvas = document.getElementById('canvas');
+  canvas = document.getElementById('conway');
   ctx = canvas.getContext('2d');
 
   initAnimation();
   addListeners();
-  //setInterval(animate, 1000);
+	isPlaying = true;
+  interval = setInterval(animate, 500);
 
   function initAnimation ()
   {
@@ -112,8 +108,8 @@ function animateBackground () {
         Math.floor(window.innerWidth / CELL_SIZE) : Math.floor(window.innerWidth / CELL_SIZE) + 1;
     noOfRows = window.innerHeight % CELL_SIZE === 0 ?
         Math.floor(window.innerHeight / CELL_SIZE) : Math.floor(window.innerHeight / CELL_SIZE) + 1;
-    canvas.width = noOfCols * CELL_SIZE; // resive canvas to be an exact fit
-    canvas.height = noOfRows * CELL_SIZE;
+    canvas.width  = canvas.offsetWidth;
+  	canvas.height = canvas.offsetHeight;
     grid = new Array(noOfRows);
     for(var k = 0; k < noOfRows; k++)
     {
@@ -180,25 +176,20 @@ function animateBackground () {
       // check if the page has scrolled!
       if(document.body.scrollTop > height)
         return;
-      offsetY = document.body.scrollTop;
+      var offsetY = document.body.scrollTop;
 
       // check if the nav-tab is pushed out or if the Conway button was clicked
-      if(!$("#nav-tab").hasClass("closed"))
-      {
-        drawOverlay();
-        return;
-      }
-      else
-        clearOverlay();
-
-      // don't let them click cells under the nav-tab, or the question mark
-      var ntabPos = $("#nav-tab").position();
-      if((event.clientX >= ntabPos.left && event.clientX <= ntabPos.left + CELL_SIZE &&
-          event.clientY >= ntabPos.top && event.clientY <= ntabPos.top + CELL_SIZE))
-      {
-        draw();
-        return;
-      }
+      if(!document.body.classList.contains("show-menu")) 
+       	return;
+			
+      // TODO don't let them click cells under the nav-tab, or the question mark
+//      var ntabPos = $("#nav-tab").position();
+//      if((event.clientX >= ntabPos.left && event.clientX <= ntabPos.left + CELL_SIZE &&
+//          event.clientY >= ntabPos.top && event.clientY <= ntabPos.top + CELL_SIZE))
+//      {
+//        draw();
+//        return;
+//      }
 
       var col = Math.floor(event.clientX / CELL_SIZE);
       var row = Math.floor((event.clientY + offsetY) / CELL_SIZE);
@@ -225,7 +216,6 @@ function animateBackground () {
         }
         output += "\n";
       }
-      console.log(output);
     }
 
     function draw () {
@@ -261,7 +251,7 @@ function animateBackground () {
 
 
     // pause/play the simulation when the p button is hit
-    $(document).on("keypress", function (e) {
+    window.onkeypress = function (e) {
       if(e.keyCode == 112)
       {
         if(isPlaying)
@@ -275,8 +265,8 @@ function animateBackground () {
           interval = setInterval(animate, 500);
         }
       }
-    });
+    };
 }
 
 // animate background when document is ready
-$(document).ready(animateBackground);
+animateBackground();
