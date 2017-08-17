@@ -1,8 +1,9 @@
+/*jshint esversion: 6 */
+
 (function () {
   var bodyEl = document.body,
 		content = document.querySelector('.content-wrap'),
 		openbtn = document.getElementById('open-button'),
-		closebtn = document.getElementById('close-button'),
 		isOpen = false;
 	
 	function toggleMenu() {
@@ -10,24 +11,38 @@
 			bodyEl.classList.remove('show-menu');
     } else {
 			bodyEl.classList.add('show-menu');
+			console.log("found it");
     }
     isOpen = !isOpen;
   }
 	
+	function isCanvasSupported(){
+  	var elem = document.createElement('canvas');
+  	return !!(elem.getContext && elem.getContext('2d'));
+	}
+	
   function initEvents() {
     openbtn.addEventListener('click', toggleMenu);
-    if (closebtn) {
-      closebtn.addEventListener('click', toggleMenu);
-    }
 
 		// close the menu element if the target it´s not the menu element or one of its descendants..
-    content.addEventListener('click', function (ev) {
-      var target = ev.target;
-      if (isOpen && target !== openbtn) {
-        toggleMenu();
-      }
+    bodyEl.addEventListener('click', function (ev) {
+			if(!document.querySelector('.menu-wrap').contains(ev.target)
+				&& !openbtn.contains(ev.target) 
+				&& document.querySelector('.container-fluid').contains(ev.target)) {
+				bodyEl.classList.remove('show-menu');
+				isOpen = false;
+			}
     });
   }
 	
   initEvents();
+	
+	// If the canvas isn't supported draw the background
+	if(!isCanvasSupported()) {
+		document.getElementsByClassName('content-wrap')[0]
+			.style.backgroundColor = "#FED18C";
+	}
+	
+	
 }());
+

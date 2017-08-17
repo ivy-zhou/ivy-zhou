@@ -15,25 +15,23 @@
         <!-- favicon -->
         <link rel="shortcut icon" href="favicon.ico"/>
 
-        <!-- fonts -->
-        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Fira+Mono' rel='stylesheet' type='text/css'>
-
         <!-- styling -->
-        <!-- <link rel="stylesheet" href="css/animate.css"> -->
-        <link rel="stylesheet" href="css/main.css">
-				
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+         				
+<!--				<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>-->
+<!--
 				<script
 				src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 				integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
 				crossorigin="anonymous"></script>
+-->
 				<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         
-				<!-- bootstrap -->
+<!--
 				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+-->
+			
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
 				
 				<link rel="stylesheet" href="css/styles.css">
 				
@@ -42,15 +40,18 @@
 		<div class="container-fluid">
 			<div class="menu-wrap">
 				<nav class="menu">
-					<div class="profile"><span>Conway's Context Menu</span></div>
+					<div class="profile"><span>Settings</span></div>
 					<div class="link-list">
-						<a href="#"><span>Latest stories</span></a>
-						<a href="#"><span>Your friends</span></a>
-						<a href="#"><span>Personal Settings</span></a>
-						<a href="#"><span>Security &amp; Privacy</span></a>
+						<a><span>Alive Colour: </span>
+							<input class="jscolor colorinput" id="alive" type="button">
+						</a>
+						<a><span>Dead Color: </span>
+							<input class="jscolor colorinput" id="dead" type="button">
+						</a>
+						<a id="reset-button"><span>Reset</span></a>
 					</div>
 					<div class="icon-list">
-						<a href="#"><i class="fa fa-fw fa-question-circle"></i></a>
+						<a><i class="fa fa-fw fa-question-circle"></i></a>
 					</div>
 				</nav>
 			</div>
@@ -110,7 +111,8 @@
 -->
 		</div><!-- /container -->
     </body>
-	
-		<script src="js/main.js"></script>
+		
 		<script src="js/animateBG.js"></script>
+		<script src="js/main.js"></script>
+		
 </html>

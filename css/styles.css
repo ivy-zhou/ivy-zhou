@@ -59,7 +59,7 @@ button:focus {
 	margin-bottom: 2em;
 	-webkit-border-radius: 50%;
   border-radius: 50%;
-  background-image: url("../apple-touch-icon.png");
+  background-image: url("../img/ivyzhou_banner1.jpg");
   background-position: center center;
   background-size: cover;
 }
@@ -100,6 +100,7 @@ button:focus {
 	letter-spacing: 1px;
 	font-weight: 800;
 	border-radius: 50px/50px;
+	border: 1px solid #FE654F;
 }
 
 .codrops-demos > a:hover {
@@ -273,8 +274,6 @@ body,
 /* Shown menu */
 .show-menu .content-wrap {
 	background: rgba(0,0,0,0.3);
-	-webkit-transition: opacity 0.3s;
-	transition: opacity 0.3s;
 }
 
 .show-menu .menu-wrap {
@@ -290,21 +289,25 @@ body,
 	transition: opacity 0.3s 0.3s;
 }
 
-section {
-	width: 100%;
-	height: 100%;
+.colorinput {
+	margin-left: 10px;
+	padding: 10px;
+	font-size: 1em;
+	width: 90px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	-webkit-appearance: none;
+	appearance: none;
+	-webkit-border-radius: none;
+	border-radius: none;
+	border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.1s;
 }
 
-section h3 {
-	text-align: center;
-}
-
-section[name='projects'] {
-	background-color: #9899A6;
-}
-
-div.carousel-item img {
-	margin: 0 auto;
+.colorinput:focus {
+	outline:none;
+	border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696;
 }
 
 /* Generated with Bounce.js. Edit at http://goo.gl/PJ93gs */
