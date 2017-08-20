@@ -25,7 +25,7 @@
 
 		// close the menu element if the target it´s not the menu element or one of its descendants..
     bodyEl.addEventListener('click', function (ev) {
-			if(!document.querySelector('.menu-wrap').contains(ev.target) && !openbtn.contains(ev.target) && document.querySelector('.container-fluid').contains(ev.target)) {
+			if(!document.querySelector('.menu-wrap').contains(ev.target) && !openbtn.contains(ev.target) && document.querySelector('.content-wrap').contains(ev.target)) {
 				bodyEl.classList.remove('show-menu');
 				isOpen = false;
 			}
