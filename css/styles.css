@@ -6,7 +6,6 @@
 .clearfix:after { clear: both; }
 
 body {
-/*	color: #FBFAF8;*/
 	font-weight: 400;
 	font-size: 1em;
 	font-family: 'Droid Sans', serif;
@@ -14,7 +13,6 @@ body {
 }
 
 a {
-/*	color: #FED18C;*/
 	color: #4e4a46;
 	text-decoration: none;
 	outline: none;
@@ -124,7 +122,6 @@ header h1 span {
 
 html, 
 body, 
-.container-fluid, 
 .content-wrap {
 	padding: 0;
 	height: 100%;
@@ -210,12 +207,6 @@ body,
 	line-height: 42px;
 	font-weight: 700;
 	padding: 1em;
-}
-
-.profile img {
-	float: right;
-	border-radius: 50%;
-	margin-left: 10px;
 }
 
 .link-list {
