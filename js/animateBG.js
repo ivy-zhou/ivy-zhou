@@ -25,6 +25,30 @@ class Cell {
   	this.curState = DEAD;
   	this.nextState = false;
 	}
+	
+	sumRow(rowPos) {
+		var aliveNeighbours = 0;
+		for(let colPos = this.col - 1; colPos <= this.col + 1; colPos++) {
+			if(!(rowPos == this.row && colPos == this.col) && 
+				 		isInBounds(rowPos, colPos) && grid[rowPos][colPos].curState) {
+					grid[rowPos][colPos].draw(window.ctx);
+					aliveNeighbours++;
+			}
+		}
+		return aliveNeighbours;
+	}
+	
+	sumCol(colPos) {
+		var aliveNeighbours = 0;
+		for(let rowPos = this.row - 1; rowPos <= this.row + 1; rowPos++) {
+			if(!(rowPos == this.row && colPos == this.col) && 
+				 		isInBounds(rowPos, colPos) && grid[rowPos][colPos].curState) {
+					grid[rowPos][colPos].draw(window.ctx);
+					aliveNeighbours++;
+			}
+		}
+		return aliveNeighbours;
+	}
 
   draw(ctx) {
     if(this.curState) // if I'm alive, draw me
@@ -39,14 +63,21 @@ class Cell {
     var aliveNeighbours = 0;
 
     for(let rowPos = this.row - 1; rowPos <= this.row + 1; rowPos++) {
-      for(let colPos = this.col - 1; colPos <= this.col + 1; colPos++) {
-        if(!(rowPos == this.row && colPos == this.col) &&
-          isInBounds(rowPos, colPos) && grid[rowPos][colPos].curState) {
-            grid[rowPos][colPos].draw(ctx);
-            aliveNeighbours++;
-        }
-      }
+      aliveNeighbours += this.sumRow(rowPos);
     }
+		
+		// at vertical edge
+		if(this.row === 0) {
+			aliveNeighbours += this.sumRow(noOfRows - 1);
+		} else if(this.row === noOfRows - 1) {
+			aliveNeighbours += this.sumRow(0);
+		}
+		
+		if(this.col === 0) {
+			aliveNeighbours += this.sumCol(noOfCols - 1);
+		} else if(this.col === noOfCols - 1) {
+			aliveNeighbours += this.sumCol(0);
+		}
 		
 		// under/over population
     if(this.curState == ALIVE && (aliveNeighbours < 2 || aliveNeighbours > 3)) 
@@ -128,12 +159,17 @@ class Conway {
 	addListeners() {
 		var self = this;
 		
-		window.addEventListener('resize', function() {
-			clearInterval(this.interval);
+		function resizedw(){
+			clearInterval(self.interval);
 			self.interval = false;
 			self.initAnimation();
-		});
-		
+		}
+
+		var doit;
+		window.onresize = function(){
+  		clearTimeout(doit);
+  		doit = setTimeout(resizedw, 100);
+		};
 		
 		window.addEventListener('click', function() {
 			if(document.body.classList.contains('show-menu')) {
@@ -142,7 +178,7 @@ class Conway {
 			} else if(!self.interval){
 				self.interval = setInterval(self.animate, 500);
 			}
-		})
+		});
 		
 		var resetBtn = document.getElementById('reset-button');
 		resetBtn.addEventListener('click', function () {
@@ -150,7 +186,7 @@ class Conway {
 				clearInterval(self.interval);
 			}
 			self.initAnimation();
-		})
+		});
 		
 		var aliveColorInput = document.getElementById('alive');
 		aliveColorInput.value = ALIVE_COLOUR;

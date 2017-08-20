@@ -11,7 +11,6 @@
 			bodyEl.classList.remove('show-menu');
     } else {
 			bodyEl.classList.add('show-menu');
-			console.log("found it");
     }
     isOpen = !isOpen;
   }
@@ -26,9 +25,7 @@
 
 		// close the menu element if the target it´s not the menu element or one of its descendants..
     bodyEl.addEventListener('click', function (ev) {
-			if(!document.querySelector('.menu-wrap').contains(ev.target)
-				&& !openbtn.contains(ev.target) 
-				&& document.querySelector('.container-fluid').contains(ev.target)) {
+			if(!document.querySelector('.menu-wrap').contains(ev.target) && !openbtn.contains(ev.target) && document.querySelector('.container-fluid').contains(ev.target)) {
 				bodyEl.classList.remove('show-menu');
 				isOpen = false;
 			}

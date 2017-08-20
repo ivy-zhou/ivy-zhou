@@ -30,13 +30,13 @@ button:focus {
 }
 
 /* Header */
-.codrops-header {
+header {
 	margin: 0 auto;
 	padding: 5em 2em;
 	text-align: center;
 }
 
-.codrops-header h1 {
+header h1 {
 	margin: 0 auto;
 	padding-top: 0.4em;
 	font-family: "Open Sans", sans-serif;
@@ -45,7 +45,7 @@ button:focus {
 	line-height: 1;
 }
 
-.codrops-header h1 span {
+header h1 span {
 	display: block;
 	font-size: 40%;
 	font-weight: 400;
@@ -64,7 +64,7 @@ button:focus {
   background-size: cover;
 }
 
-.codrops-links {
+.branding {
 	text-transform: uppercase;
 	font-weight: 700;
 	font-size: 0.69em;
@@ -72,23 +72,21 @@ button:focus {
 	padding: 1.61em 5em;
 }
 
-.codrops-links a {
+.branding a {
 	display: inline-block;
-	padding: 0 1em;
-	text-decoration: none;
-	letter-spacing: 1px;
+	padding: 0 0.25em;
 }
 
 
 /* Demo Buttons Style */
-.codrops-demos {
+.pill-links {
 	font-size: 1em;
 	max-width: 1200px;
 	margin: 3em auto 5em;
 	padding: 2em 10em 0;
 }
 
-.codrops-demos > a {
+.pill-links > a {
 	display: inline-block;
 	margin: 0.75em;
 	padding: 1em 1em;
@@ -103,7 +101,7 @@ button:focus {
 	border: 1px solid #FE654F;
 }
 
-.codrops-demos > a:hover {
+.pill-links > a:hover {
 	background: #FE654F;
 	color: #FEFEFF;
 }
@@ -112,30 +110,16 @@ button:focus {
 	body {
 		font-size: 80%;
 	}
-	.codrops-header h1 {
+	header h1 {
 		font-size: 2.5em;
 	}
-	.codrops-demos {
+	.pill-links {
 		max-width: 900px;
 		padding: 2em 2em 0;
 	}
 	.related > a {
 		margin: 20px 0;
 	}
-}
-
-@media screen and (max-width: 25em) {
-/*
-	.codrops-icon {
-		font-size: 250%;
-	}
-*/
-/*
-
-	.codrops-icon span {
-		display: none;
-	}
-*/
 }
 
 html, 
@@ -268,10 +252,8 @@ body,
 .icon-list a {
 	font-size: 1.5em;
 	margin-left: 0.25em;
-	color: rgba(125,129,148,0.5);
 }
 
-/* Shown menu */
 .show-menu .content-wrap {
 	background: rgba(0,0,0,0.3);
 }
