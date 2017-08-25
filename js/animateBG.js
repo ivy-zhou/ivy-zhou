@@ -232,5 +232,5 @@ class Conway {
 }
 
 
-let conway = new Conway();
-conway.start();
+let conwayBG = new Conway();
+conwayBG.start();
