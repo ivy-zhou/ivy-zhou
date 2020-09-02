@@ -1,78 +1,88 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>Ivy Zhou</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <!-- metadata -->
-        <meta name="description" content="Ivy Zhou is a software engineering student at uWaterloo.">
-        <meta name="keywords" content="Ivy Zhou, software engineering, uWaterloo, Waterloo" />
-        <meta name="author" content="Ivy Zhou"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ivy Zhou</title>
 
-        <!-- favicon -->
-        <link rel="shortcut icon" href="favicon.ico"/>
+    <!-- metadata -->
+    <meta name="description" content="Ivy Zhou writes programs">
+    <meta name="keywords" content="Ivy Zhou, computer science, uWaterloo, University of Waterloo" />
+    <meta name="author" content="Ivy Zhou" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- styling -->
-        
-				<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
-				
-				<link rel="stylesheet" href="css/styles.css">
-				
-    </head>
-    <body>
-			<div class="menu-wrap">
-				<nav class="menu">
-					<div class="profile"><span>Settings</span></div>
-					<div class="link-list">
-						<a><span>Alive Colour: </span>
-							<input class="jscolor colorinput" id="alive" type="button">
-						</a>
-						<a><span>Dead Color: </span>
-							<input class="jscolor colorinput" id="dead" type="button">
-						</a>
-						<a id="reset-button"><span>Reset</span></a>
-					</div>
-					<div class="icon-list">
-						<a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" class="fa fa-fw fa-question-circle"></a>
-					</div>
-				</nav>
-			</div>
-			<button class="menu-button" id="open-button"><i class="fa fa-fw fa-cog"></i><span>Open Menu</span></button>
-			<div class="content-wrap">
-				<canvas id="conway"></canvas>
-				<section class="content">
-					<header>
-						<div class="branding">
-							<div id="profile-image"></div>
-							<a href="https://github.com/ivy-zhou" class="fa fa-github fa-2x brand-icons"></a>
-							<a href="https://www.linkedin.com/in/zhouivy/" class="fa fa-linkedin fa-2x brand-icons"></a>
-						</div>
-						<h1>Ivy Zhou<span>code person</span></h1>
-						<nav class="pill-links">
-							<a href="http://ivy-zhou.github.io/blog/">blog</a>
-							<a href="https://www.gitbook.com/@ivy-zhou">notes</a>
-							<a href="http://ivy-zhou.github.io/Resume.pdf">resume</a>
-						</nav>
-					</header>
-				</section>
-			</div><!-- /content-wrap -->
+    <!-- favicon -->
+    <link rel="shortcut icon" href="favicon.ico" />
 
-		<!-- Google Analytics -->
-		<script>
-				(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-				function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-				e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-				e.src='https://www.google-analytics.com/analytics.js';
-				r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-				ga('create','UA-66199017-2','auto');ga('send','pageview');
-		</script>
-		
-		<script src="js/animateBG.js"></script>
-		<script src="js/main.js"></script>
-		
+    <!-- styling -->
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscolor/2.0.4/jscolor.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+    <div class="menu-wrap">
+        <nav class="menu">
+            <div class="profile"><span>Settings</span></div>
+            <div class="link-list">
+                <a><span>Alive Colour: </span>
+                    <input class="jscolor colorinput" id="alive" type="button">
+                </a>
+                <a><span>Dead Color: </span>
+                    <input class="jscolor colorinput" id="dead" type="button">
+                </a>
+                <a id="reset-button"><span>Reset</span></a>
+            </div>
+            <div class="icon-list">
+                <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" class="fa fa-fw fa-question-circle"></a>
+            </div>
+        </nav>
+    </div>
+    <button class="menu-button" id="open-button"><i class="fa fa-fw fa-cog"></i><span>Open Menu</span></button>
+    <div class="content-wrap">
+        <canvas id="conway"></canvas>
+        <section class="content">
+            <header>
+                <div class="branding">
+                    <div id="profile-image"></div>
+                    <a href="https://github.com/ivy-zhou" class="fa fa-github fa-2x brand-icons"></a>
+                    <a href="https://www.linkedin.com/in/zhouivy/" class="fa fa-linkedin fa-2x brand-icons"></a>
+                </div>
+                <h1>Ivy Zhou<span>code person</span></h1>
+                <nav class="pill-links">
+                    <a href="http://ivy-zhou.github.io/notes/">notes</a>
+                </nav>
+            </header>
+        </section>
+    </div><!-- /content-wrap -->
+
+    <!-- Google Analytics -->
+    <script>
+        (function (b, o, i, l, e, r) {
+            b.GoogleAnalyticsObject = l;
+            b[l] || (b[l] =
+                function () {
+                    (b[l].q = b[l].q || []).push(arguments)
+                });
+            b[l].l = +new Date;
+            e = o.createElement(i);
+            r = o.getElementsByTagName(i)[0];
+            e.src = 'https://www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e, r)
+        }(window, document, 'script', 'ga'));
+        ga('create', 'UA-66199017-2', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+    <script src="js/animateBG.js"></script>
+    <script src="js/main.js"></script>
+
 </html>
